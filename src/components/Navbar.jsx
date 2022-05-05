@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   AppBar,
   Avatar,
   Badge,
   Box,
   InputBase,
+  Menu,
+  MenuItem,
   styled,
   Toolbar,
   Typography
@@ -42,6 +44,8 @@ const StyledUserBox = styled(Box)(({ theme }) => ({
 }))
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false)
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -60,11 +64,12 @@ const Navbar = () => {
             <Notifications />
           </Badge>
           <Avatar
+            onClick={() => setOpen(true)}
             sx={{ width: 30, height: 30 }}
             src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           />
         </StyledIcons>
-        <StyledUserBox>
+        <StyledUserBox onClick={() => setOpen(true)}>
           <Avatar
             sx={{ width: 30, height: 30 }}
             src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -72,6 +77,24 @@ const Navbar = () => {
           <Typography variant="span">Charles</Typography>
         </StyledUserBox>
       </StyledToolbar>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right"
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right"
+        }}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>My account</MenuItem>
+        <MenuItem>Logout</MenuItem>
+      </Menu>
     </AppBar>
   )
 }
